@@ -3,779 +3,1057 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IEVR Platform — Industrial Ecological Value Realisation</title>
+<title>IEVR — Industrial Ecological Value Realisation Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --teal-dark:   #064E3B;
-  --teal-mid:    #0D7C6E;
-  --teal-light:  #A7F3D0;
-  --teal-pale:   #ECFDF5;
-  --blue-dark:   #1E3A5F;
-  --blue-mid:    #2563EB;
-  --blue-light:  #BFDBFE;
-  --blue-pale:   #EFF6FF;
-  --amber-dark:  #78350F;
-  --amber-mid:   #D97706;
-  --amber-light: #FDE68A;
-  --amber-pale:  #FFFBEB;
-  --red-dark:    #7F1D1D;
-  --red-mid:     #DC2626;
-  --red-light:   #FECACA;
-  --red-pale:    #FEF2F2;
-  --green-dark:  #14532D;
-  --green-mid:   #16A34A;
-  --green-light: #BBF7D0;
-  --purple-dark: #3B0764;
-  --purple-mid:  #7C3AED;
-  --purple-light:#DDD6FE;
-  --ink:         #0F172A;
-  --ink-2:       #334155;
-  --ink-3:       #64748B;
-  --border:      #E2E8F0;
-  --bg:          #F8FAFC;
-  --white:       #FFFFFF;
-  --serif:       'DM Serif Display', Georgia, serif;
-  --sans:        'DM Sans', system-ui, sans-serif;
+  --ink:       #0A0F1E;
+  --ink2:      #1E2640;
+  --ink3:      #3D4966;
+  --ink4:      #6B7A99;
+  --rule:      rgba(255,255,255,.08);
+  --rule2:     rgba(255,255,255,.04);
+  --white:     #FFFFFF;
+  --off:       #F0F2F7;
+  --teal:      #00C896;
+  --teal-d:    #007A5C;
+  --teal-dk:   #004D3A;
+  --teal-dim:  rgba(0,200,150,.12);
+  --teal-glow: rgba(0,200,150,.06);
+  --blue:      #3B82F6;
+  --blue-d:    #1D4ED8;
+  --blue-dim:  rgba(59,130,246,.12);
+  --red:       #EF4444;
+  --red-dim:   rgba(239,68,68,.12);
+  --amber:     #F59E0B;
+  --amber-dim: rgba(245,158,11,.12);
+  --gold:      #EAB308;
+  --gold-dim:  rgba(234,179,8,.1);
+  --purple:    #A78BFA;
+  --purple-dim:rgba(167,139,250,.12);
+  --hk:        #E11D48;
+  --hk-dim:    rgba(225,29,72,.1);
+  --serif:     'Playfair Display', Georgia, serif;
+  --sans:      'IBM Plex Sans', system-ui, sans-serif;
+  --mono:      'IBM Plex Mono', 'Courier New', monospace;
 }
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--ink);
-  min-height: 100vh;
-  padding: 0 0 80px;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--ink);color:var(--white);line-height:1.6;padding-bottom:80px;}
+ 
+/* ── TYPOGRAPHY ── */
+.serif{font-family:var(--serif);}
+.mono{font-family:var(--mono);font-size:.9em;letter-spacing:.02em;}
+h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.2;}
+strong{font-weight:600;}
+ 
+/* ── LAYOUT ── */
+.wrap{max-width:960px;margin:0 auto;padding:0 28px;}
+.divider{height:1px;background:var(--rule);margin:0;}
+.gap-sm{height:20px;} .gap{height:32px;} .gap-lg{height:48px;}
+ 
+/* ── SECTION LABELS ── */
+.sec{
+  font-family:var(--mono);font-size:9px;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);
+  margin:48px 0 18px;display:flex;align-items:center;gap:14px;
 }
-
-/* ── Header ── */
-.page-header {
-  background: var(--ink);
-  padding: 48px 40px 40px;
-  position: relative;
-  overflow: hidden;
+.sec::before{content:'';width:24px;height:1px;background:var(--ink3);}
+.sec::after{content:'';flex:1;height:1px;background:var(--rule);}
+ 
+/* ── HEADER ── */
+.hdr{
+  padding:64px 28px 56px;
+  background:linear-gradient(160deg,#0A0F1E 0%,#0D1829 60%,#0A1A14 100%);
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--rule);
 }
-.page-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 40px,
-    rgba(255,255,255,.015) 40px,
-    rgba(255,255,255,.015) 80px
-  );
-  pointer-events: none;
+.hdr::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-55deg,transparent,transparent 60px,rgba(0,200,150,.015) 60px,rgba(0,200,150,.015) 61px);
+  pointer-events:none;
 }
-.header-inner {
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
+.hdr::after{
+  content:'工业生态产品价值实现';
+  position:absolute;right:-10px;bottom:-30px;
+  font-family:var(--serif);font-size:96px;font-weight:900;
+  color:rgba(0,200,150,.04);letter-spacing:.05em;
+  pointer-events:none;white-space:nowrap;line-height:1;
 }
-.header-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--teal-light);
-  margin-bottom: 16px;
+.hdr-inner{max-width:960px;margin:0 auto;position:relative;}
+.hdr-kicker{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
 }
-.header-title {
-  font-family: var(--serif);
-  font-size: clamp(28px, 5vw, 44px);
-  color: var(--white);
-  line-height: 1.15;
-  margin-bottom: 10px;
+.hdr-kicker::before{content:'';width:32px;height:1px;background:var(--teal);}
+.hdr-title{font-size:clamp(30px,5.5vw,52px);color:var(--white);margin-bottom:10px;line-height:1.1;}
+.hdr-cn{font-size:16px;color:rgba(255,255,255,.3);letter-spacing:.08em;margin-bottom:22px;}
+.hdr-thesis{
+  font-size:14px;color:rgba(255,255,255,.55);line-height:1.7;
+  max-width:680px;padding-left:20px;
+  border-left:2px solid var(--teal-d);
 }
-.header-cn {
-  font-size: 16px;
-  color: rgba(255,255,255,.45);
-  letter-spacing: .06em;
-  margin-bottom: 20px;
+.hdr-meta{
+  margin-top:32px;display:flex;flex-wrap:wrap;gap:8px;
 }
-.header-sub {
-  font-size: 14px;
-  color: rgba(255,255,255,.6);
-  line-height: 1.6;
-  max-width: 620px;
+.chip{
+  font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:3px;border:1px solid;
 }
-.header-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 24px;
+.chip-t{color:var(--teal);border-color:rgba(0,200,150,.25);background:var(--teal-dim);}
+.chip-b{color:#93C5FD;border-color:rgba(147,197,253,.2);background:var(--blue-dim);}
+.chip-a{color:#FCD34D;border-color:rgba(252,211,77,.2);background:var(--amber-dim);}
+.chip-r{color:#FDA4AF;border-color:rgba(253,164,175,.2);background:var(--red-dim);}
+.chip-p{color:var(--purple);border-color:rgba(167,139,250,.2);background:var(--purple-dim);}
+ 
+/* ── METRICS BAND ── */
+.metrics-band{
+  background:var(--ink2);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:28px 28px;
 }
-.badge {
-  font-size: 11px;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 99px;
-  border: 1px solid;
+.metrics-grid{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--rule);
 }
-.badge-teal  { color: var(--teal-light);  border-color: rgba(167,243,208,.3); background: rgba(167,243,208,.08); }
-.badge-blue  { color: var(--blue-light);  border-color: rgba(191,219,254,.3); background: rgba(191,219,254,.08); }
-.badge-amber { color: var(--amber-light); border-color: rgba(253,230,138,.3); background: rgba(253,230,138,.08); }
-
-/* ── Layout container ── */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
+.metric{
+  background:var(--ink2);padding:20px 18px;
+  text-align:center;
 }
-
-/* ── Section labels ── */
-.section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin: 40px 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.metric-num{
+  font-family:var(--serif);font-size:clamp(22px,3.5vw,32px);
+  font-weight:700;margin-bottom:4px;
 }
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
+.metric-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);line-height:1.5;}
+.m-t .metric-num{color:var(--teal);}
+.m-b .metric-num{color:#93C5FD;}
+.m-a .metric-num{color:var(--amber);}
+.m-g .metric-num{color:#86EFAC;}
+ 
+/* ── PROBLEMS ── */
+.prob-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);}
+.prob{padding:22px 22px 20px;background:var(--ink2);}
+.prob-flag{
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:10px;display:flex;align-items:center;gap:8px;
 }
-
-/* ── The two problems row ── */
-.problems {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+.prob-flag::before{content:'';width:3px;height:12px;border-radius:1px;}
+.prob.china .prob-flag{color:#93C5FD;} .prob.china .prob-flag::before{background:#3B82F6;}
+.prob.eu    .prob-flag{color:#FDA4AF;} .prob.eu    .prob-flag::before{background:var(--red);}
+.prob-title{font-size:14px;font-weight:600;margin-bottom:8px;}
+.prob-body{font-size:11px;color:rgba(255,255,255,.5);line-height:1.65;}
+.prob-nums{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
+.pnum{
+  font-family:var(--mono);font-size:10px;padding:3px 8px;
+  border-radius:2px;border:1px solid;
 }
-.problem-card {
-  border-radius: 10px;
-  padding: 16px 18px;
-  border: 1px solid;
-  position: relative;
-  cursor: default;
-  transition: transform .15s;
+.china .pnum{color:#93C5FD;border-color:rgba(147,197,253,.2);background:var(--blue-dim);}
+.eu    .pnum{color:#FDA4AF;border-color:rgba(253,164,175,.2);background:var(--red-dim);}
+ 
+/* ── PLATFORM BAR ── */
+.platform{
+  background:var(--purple-dim);border:1px solid rgba(167,139,250,.2);
+  border-radius:4px;padding:16px 22px;text-align:center;
 }
-.problem-card:hover { transform: translateY(-1px); }
-.problem-card.china {
-  background: var(--blue-pale);
-  border-color: var(--blue-light);
+.platform-name{font-size:13px;font-weight:600;color:var(--purple);margin-bottom:3px;}
+.platform-sub{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:rgba(167,139,250,.5);}
+ 
+/* ── PARK MODEL ── */
+.park-outer{
+  border:1px solid rgba(0,200,150,.2);border-radius:6px;
+  background:rgba(0,200,150,.03);overflow:hidden;
 }
-.problem-card.eu {
-  background: var(--red-pale);
-  border-color: var(--red-light);
+.park-header{
+  background:var(--teal-dk);padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;
 }
-.problem-title {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 5px;
+.park-header-title{font-size:13px;font-weight:700;color:var(--teal);}
+.park-header-sub{font-family:var(--mono);font-size:9px;color:rgba(0,200,150,.5);letter-spacing:.08em;}
+.park-principle{
+  padding:12px 20px;background:rgba(0,200,150,.04);
+  border-bottom:1px solid rgba(0,200,150,.1);
+  font-size:11px;color:rgba(255,255,255,.45);line-height:1.6;font-style:italic;
 }
-.china .problem-title { color: var(--blue-dark); }
-.eu    .problem-title { color: var(--red-dark); }
-.problem-body {
-  font-size: 12px;
-  line-height: 1.55;
+.park-principle strong{color:var(--teal);font-style:normal;}
+.park-infra{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
+  background:rgba(0,200,150,.08);margin:0;
 }
-.china .problem-body { color: var(--blue-dark); opacity: .75; }
-.eu    .problem-body { color: var(--red-dark); opacity: .75; }
-
-/* ── Convergence arrow ── */
-.converge {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  padding: 12px 0;
-  color: var(--ink-3);
-  font-size: 11px;
+.infra-item{
+  background:rgba(0,10,5,.4);padding:10px 10px 11px;text-align:center;
 }
-.converge-line {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex: 1;
-  max-width: 200px;
+.infra-icon{font-size:16px;margin-bottom:4px;display:block;}
+.infra-name{font-size:10px;font-weight:600;color:var(--teal);display:block;margin-bottom:2px;}
+.infra-sub{font-size:9px;color:rgba(0,200,150,.4);display:block;line-height:1.4;}
+ 
+/* ── HYDROGEN CORE ── */
+.h2-core{
+  margin:16px;border-radius:5px;
+  background:var(--gold-dim);border:1px solid rgba(234,179,8,.2);
+  padding:16px 18px;
 }
-.converge-line .line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
+.h2-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px;}
+.h2-left{}
+.h2-flag{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.h2-name{font-size:16px;font-weight:700;color:var(--white);margin-bottom:3px;}
+.h2-cn{font-size:11px;color:rgba(255,255,255,.35);}
+.h2-lcoh{
+  background:rgba(234,179,8,.15);border:1px solid rgba(234,179,8,.3);
+  border-radius:4px;padding:10px 16px;text-align:center;
 }
-.converge-line .arrow {
-  font-size: 14px;
-  color: var(--ink-3);
+.h2-lcoh-num{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--gold);line-height:1;}
+.h2-lcoh-lbl{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:rgba(234,179,8,.5);text-transform:uppercase;margin-top:3px;}
+.h2-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+.h2-stat{background:rgba(0,0,0,.2);border-radius:3px;padding:8px 10px;border:1px solid rgba(234,179,8,.1);}
+.h2-stat-n{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--gold);}
+.h2-stat-l{font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;line-height:1.3;}
+.h2-flows{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.h2-flow-lbl{font-family:var(--mono);font-size:9px;color:rgba(234,179,8,.4);letter-spacing:.08em;text-transform:uppercase;margin-right:4px;}
+.h2-dest{
+  font-size:10px;font-weight:600;padding:3px 8px;border-radius:2px;
+  background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.15);color:rgba(255,255,255,.6);
 }
-
-/* ── Platform bar ── */
-.platform-bar {
-  background: var(--purple-dark);
-  border-radius: 10px;
-  padding: 16px 22px;
-  border: 1px solid rgba(221,214,254,.2);
-  text-align: center;
+ 
+/* ── PRODUCTION STREAMS ── */
+.streams-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(0,200,150,.06);
+  margin:16px;border-radius:4px;overflow:hidden;
 }
-.platform-bar-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--purple-light);
-  margin-bottom: 4px;
+.stream{background:var(--ink2);padding:13px 13px 14px;transition:background .2s;}
+.stream:hover{background:var(--ink3);}
+.stream-num{font-family:var(--mono);font-size:8px;color:var(--ink4);letter-spacing:.1em;margin-bottom:5px;}
+.stream-name{font-size:12px;font-weight:700;color:var(--white);margin-bottom:3px;}
+.stream-cdm{font-size:10px;color:var(--teal);margin-bottom:2px;font-weight:500;}
+.stream-co2{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.35);margin-bottom:5px;}
+.stream-ecru{
+  font-family:var(--mono);font-size:9px;
+  color:var(--teal);background:var(--teal-dim);
+  padding:2px 6px;border-radius:2px;display:inline-block;
+  border:1px solid rgba(0,200,150,.2);
 }
-.platform-bar-sub {
-  font-size: 11px;
-  color: rgba(221,214,254,.6);
+ 
+/* ── INSTRUMENT SPLIT ── */
+.split-rule{
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;padding:20px 0 14px;
 }
-
-/* ── Production streams ── */
-.streams-outer {
-  border: 1.5px dashed rgba(13,124,110,.35);
-  border-radius: 12px;
-  padding: 16px;
-  background: rgba(236,253,245,.4);
-  position: relative;
+.split-line{flex:1;height:1px;background:var(--rule);}
+.split-pill{
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  padding:6px 16px;border-radius:99px;
+  border:1px solid rgba(167,139,250,.3);background:var(--purple-dim);color:var(--purple);
 }
-.streams-label {
-  font-size: 10px;
-  color: var(--teal-dark);
-  font-weight: 500;
-  margin-bottom: 12px;
-  opacity: .7;
+ 
+.inst-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);}
+.inst{background:var(--ink2);overflow:hidden;}
+.inst-hd{padding:16px 18px 13px;}
+.inst-flag{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;}
+.inst-name{font-size:15px;font-weight:700;color:var(--white);margin-bottom:3px;line-height:1.2;}
+.inst-cn{font-size:10px;line-height:1.5;}
+.inst-bd{padding:14px 18px 16px;border-top:1px solid var(--rule);}
+.inst-bd p{font-size:11px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:8px;}
+.inst-bd p:last-of-type{margin-bottom:10px;}
+.inst-bd p strong{color:var(--white);}
+.itags{display:flex;flex-wrap:wrap;gap:4px;}
+.itag{font-family:var(--mono);font-size:8px;letter-spacing:.06em;padding:2px 6px;border-radius:2px;border:1px solid;}
+ 
+.smi .inst-hd{background:linear-gradient(135deg,var(--teal-dk),rgba(0,77,58,.7));}
+.smi .inst-flag{color:var(--teal);}
+.smi .inst-cn{color:rgba(0,200,150,.5);}
+.smi .itag{color:var(--teal);border-color:rgba(0,200,150,.2);background:var(--teal-dim);}
+ 
+.scmi .inst-hd{background:linear-gradient(135deg,#1E3A5F,rgba(30,58,95,.7));}
+.scmi .inst-flag{color:#93C5FD;}
+.scmi .inst-cn{color:rgba(147,197,253,.5);}
+.scmi .itag{color:#93C5FD;border-color:rgba(147,197,253,.2);background:var(--blue-dim);}
+ 
+/* ── ORE TABLE ── */
+.ore-table-wrap{border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead th{
+  background:var(--ink2);
+  font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink4);padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule);
 }
-.streams-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin-bottom: 8px;
+tbody tr{border-bottom:1px solid var(--rule2);}
+tbody tr:last-child{border-bottom:none;}
+tbody td{padding:10px 12px;font-size:11px;color:rgba(255,255,255,.5);vertical-align:middle;line-height:1.4;}
+tbody td:first-child{color:rgba(255,255,255,.75);font-weight:500;}
+tbody tr.cert{background:var(--teal-glow);}
+tbody tr.cert td{color:rgba(255,255,255,.65);}
+tbody tr.cert td:first-child{color:var(--teal);}
+tbody tr.instr{background:var(--blue-dim);}
+tbody tr.instr td{color:rgba(255,255,255,.5);}
+tbody tr.instr td:first-child{color:#93C5FD;font-weight:600;}
+.pill{font-family:var(--mono);font-size:8px;letter-spacing:.06em;padding:2px 6px;border-radius:2px;border:1px solid;white-space:nowrap;}
+.pill-u{color:var(--red);border-color:rgba(239,68,68,.2);background:var(--red-dim);}
+.pill-c{color:var(--teal);border-color:rgba(0,200,150,.2);background:var(--teal-dim);}
+.pill-i{color:#93C5FD;border-color:rgba(147,197,253,.2);background:var(--blue-dim);}
+ 
+/* ── LIABILITY ── */
+.liab-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);}
+.liab{background:var(--ink2);overflow:hidden;}
+.liab-hd{padding:13px 16px 11px;border-bottom:1px solid var(--rule);}
+.liab-hd-title{font-size:12px;font-weight:700;margin-bottom:2px;}
+.liab-hd-sub{font-family:var(--mono);font-size:8px;letter-spacing:.08em;color:var(--ink4);}
+.liab.steel .liab-hd-title{color:#93C5FD;}
+.liab.saf   .liab-hd-title{color:#86EFAC;}
+.liab-rows{}
+.liab-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 16px;border-bottom:1px solid var(--rule2);gap:12px;}
+.liab-row:last-child{border-bottom:none;}
+.liab-lbl{font-size:10px;color:rgba(255,255,255,.35);flex:1;}
+.liab-val{font-family:var(--mono);font-size:11px;font-weight:500;text-align:right;white-space:nowrap;}
+.liab-val.red{color:var(--red);}
+.liab-val.teal{color:var(--teal);}
+.liab-val.amber{color:var(--amber);}
+.liab-val.white{color:rgba(255,255,255,.75);}
+ 
+/* ── EXCHANGE ── */
+.exchange{
+  background:var(--ink2);border:1px solid rgba(225,29,72,.2);
+  border-radius:6px;padding:24px;position:relative;overflow:hidden;
 }
-.stream {
-  border-radius: 8px;
-  padding: 9px 8px;
-  border: 1px solid;
-  text-align: center;
-  cursor: default;
-  transition: transform .15s;
+.exchange::before{
+  content:'HKG';position:absolute;right:20px;top:14px;
+  font-family:var(--serif);font-size:80px;font-weight:900;
+  color:rgba(225,29,72,.06);pointer-events:none;line-height:1;
 }
-.stream:hover { transform: translateY(-2px); }
-.stream-name { font-size: 12px; font-weight: 600; display: block; margin-bottom: 2px; }
-.stream-sub  { font-size: 10px; line-height: 1.4; display: block; opacity: .7; }
-.s-iron   { background: var(--teal-pale);   border-color: var(--teal-light);   color: var(--teal-dark); }
-.s-cement { background: var(--blue-pale);   border-color: var(--blue-light);   color: var(--blue-dark); }
-.s-fert   { background: var(--amber-pale);  border-color: var(--amber-light);  color: var(--amber-dark); }
-.s-saf    { background: #F0FDF4;            border-color: var(--green-light);  color: var(--green-dark); }
-.s-bat    { background: #FDF4FF;            border-color: #E9D5FF;             color: #581C87; }
-.eco-strip {
-  border-radius: 7px;
-  padding: 8px 12px;
-  text-align: center;
-  background: rgba(255,255,255,.7);
-  border: 1px solid var(--border);
-  font-size: 11px;
-  color: var(--ink-2);
+.exch-flag{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--hk);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.exch-flag::before{content:'';width:20px;height:1px;background:var(--hk);}
+.exch-title{font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.exch-sub{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:20px;}
+.exch-clarify{
+  background:rgba(225,29,72,.06);border:1px solid rgba(225,29,72,.15);
+  border-radius:4px;padding:12px 14px;margin-bottom:20px;
+  font-size:11px;color:rgba(255,255,255,.5);line-height:1.65;
 }
-.eco-strip strong { color: var(--ink); }
-
-/* ── THE SEPARATION ── */
-.separation-wrapper {
-  position: relative;
-  padding: 8px 0;
+.exch-clarify strong{color:rgba(255,255,255,.8);}
+.exch-legs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
+.leg{background:rgba(255,255,255,.03);border:1px solid var(--rule);border-radius:4px;padding:12px;}
+.leg-n{font-family:var(--mono);font-size:8px;letter-spacing:.12em;color:var(--hk);margin-bottom:5px;}
+.leg-t{font-size:11px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:4px;line-height:1.3;}
+.leg-b{font-size:10px;color:rgba(255,255,255,.35);line-height:1.5;}
+.flow-strip{
+  background:rgba(0,0,0,.3);border-radius:4px;padding:12px 14px;
+  display:flex;align-items:center;flex-wrap:wrap;gap:5px;
+  font-family:var(--mono);font-size:9px;
 }
-.separation-pill {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  width: fit-content;
-  background: var(--purple-dark);
-  border-radius: 99px;
-  padding: 7px 20px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--purple-light);
-  letter-spacing: .02em;
-  border: 1px solid rgba(221,214,254,.25);
+.fn{padding:4px 8px;border-radius:2px;border:1px solid;font-weight:500;white-space:nowrap;}
+.fn-r {color:#FDA4AF;border-color:rgba(253,164,175,.2);background:rgba(225,29,72,.1);}
+.fn-w {color:rgba(255,255,255,.5);border-color:var(--rule);}
+.fn-t {color:var(--teal);border-color:rgba(0,200,150,.2);background:var(--teal-dim);}
+.fn-g {color:#FCD34D;border-color:rgba(252,211,77,.15);background:rgba(234,179,8,.08);}
+.fa {color:var(--ink4);font-size:11px;}
+ 
+/* ── FINANCE LAYER ── */
+.finance{
+  background:rgba(167,139,250,.04);border:1px solid rgba(167,139,250,.15);
+  border-radius:6px;padding:24px;
 }
-.separation-dashes {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  padding: 4px 0;
-  color: rgba(124,58,237,.3);
-  font-size: 18px;
-  letter-spacing: 3px;
+.fin-flag{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.fin-flag::before{content:'';width:20px;height:1px;background:var(--purple);}
+.fin-title{font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.fin-sub{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:18px;}
+.fin-stack{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+.fin-layer{background:rgba(0,0,0,.25);border:1px solid rgba(167,139,250,.12);border-radius:4px;padding:13px;}
+.fin-layer-n{font-family:var(--mono);font-size:8px;letter-spacing:.12em;color:var(--purple);margin-bottom:6px;}
+.fin-layer-t{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:4px;}
+.fin-layer-b{font-size:10px;color:rgba(255,255,255,.35);line-height:1.55;}
+.fin-eq{
+  background:rgba(0,0,0,.3);border-radius:4px;padding:16px;
+  display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:0;
 }
-
-/* ── Instrument cards ── */
-.instruments {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+.fin-eq-side{padding:0 4px;}
+.fin-eq-lbl{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px;}
+.fin-eq-item{font-size:10px;color:rgba(255,255,255,.45);margin-bottom:4px;padding-left:10px;position:relative;line-height:1.4;}
+.fin-eq-item::before{content:'→';position:absolute;left:0;color:var(--ink4);}
+.fin-eq-item strong{color:rgba(255,255,255,.75);}
+.fin-eq-arr{font-size:22px;color:rgba(255,255,255,.15);text-align:center;}
+.fin-ratio{
+  margin-top:12px;padding:10px 14px;background:var(--teal-dim);border-radius:3px;
+  border:1px solid rgba(0,200,150,.15);font-size:11px;color:rgba(255,255,255,.5);text-align:center;line-height:1.7;
 }
-.instrument-card {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid;
-  transition: transform .15s;
+.fin-ratio strong{color:var(--teal);font-weight:700;}
+ 
+/* ── VIRTUOUS CYCLE ── */
+.cycle{background:var(--ink2);border:1px solid var(--rule);border-radius:6px;padding:24px;}
+.cycle-flag{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.cycle-flag::before{content:'';width:20px;height:1px;background:var(--teal);}
+.cycle-title{font-size:18px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.cycle-sub{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:18px;}
+.cycle-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;}
+.cs{background:rgba(0,0,0,.25);border:1px solid var(--rule);border-radius:4px;padding:12px;}
+.cs-n{font-family:var(--mono);font-size:8px;letter-spacing:.1em;color:var(--teal);opacity:.5;margin-bottom:5px;}
+.cs-t{font-size:11px;font-weight:600;color:rgba(255,255,255,.75);margin-bottom:4px;line-height:1.3;}
+.cs-b{font-size:10px;color:rgba(255,255,255,.3);line-height:1.5;}
+.cycle-loop{
+  font-family:var(--mono);font-size:9px;letter-spacing:.05em;
+  color:rgba(0,200,150,.35);text-align:center;
+  border-top:1px solid var(--rule);padding-top:14px;line-height:1.8;
 }
-.instrument-card:hover { transform: translateY(-2px); }
-.inst-head {
-  padding: 14px 18px 12px;
+ 
+/* ── THREE MARKETS ── */
+.markets{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule);}
+.mkt{background:var(--ink2);padding:16px;}
+.mkt-flag{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+.mkt-title{font-size:12px;font-weight:700;margin-bottom:6px;}
+.mkt-body{font-size:10px;color:rgba(255,255,255,.35);line-height:1.6;}
+.m-ets  .mkt-flag,.m-ets  .mkt-title{color:#93C5FD;}
+.m-cbam .mkt-flag,.m-cbam .mkt-title{color:#FDA4AF;}
+.m-vcm  .mkt-flag,.m-vcm  .mkt-title{color:#86EFAC;}
+ 
+/* ── THESIS ── */
+.thesis{
+  background:linear-gradient(135deg,var(--teal-dk),#0A2A1F);
+  border:1px solid rgba(0,200,150,.2);border-radius:6px;
+  padding:36px 32px;text-align:center;position:relative;overflow:hidden;
 }
-.inst-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; margin-bottom: 4px; }
-.inst-name  { font-size: 17px; font-weight: 700; line-height: 1.2; margin-bottom: 2px; }
-.inst-cn    { font-size: 11px; opacity: .65; }
-.inst-body  {
-  background: var(--white);
-  padding: 12px 18px 16px;
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--ink-2);
+.thesis::before{
+  content:'"';position:absolute;left:20px;top:-20px;
+  font-family:var(--serif);font-size:160px;color:rgba(0,200,150,.05);
+  line-height:1;pointer-events:none;
 }
-.inst-body strong { color: var(--ink); font-weight: 600; }
-.inst-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-.itag {
-  font-size: 10px;
-  font-weight: 500;
-  padding: 2px 8px;
-  border-radius: 4px;
-  border: 1px solid;
+.thesis-main{font-size:clamp(22px,4vw,36px);font-weight:700;color:var(--white);margin-bottom:8px;position:relative;}
+.thesis-cn{font-size:14px;color:var(--teal);letter-spacing:.12em;margin-bottom:16px;}
+.thesis-tagline{
+  font-size:12px;color:rgba(255,255,255,.4);line-height:1.8;
+  max-width:600px;margin:0 auto 20px;
 }
-
-.smi { border-color: var(--teal-mid); }
-.smi .inst-head { background: var(--teal-dark); color: var(--white); }
-.smi .inst-label { color: var(--teal-light); }
-.smi .inst-name  { color: var(--white); }
-.smi .inst-cn    { color: var(--teal-light); }
-.smi .itag { background: var(--teal-pale); border-color: var(--teal-light); color: var(--teal-dark); }
-
-.scmi { border-color: var(--blue-mid); }
-.scmi .inst-head { background: var(--blue-dark); color: var(--white); }
-.scmi .inst-label { color: var(--blue-light); }
-.scmi .inst-name  { color: var(--white); }
-.scmi .inst-cn    { color: var(--blue-light); }
-.scmi .itag { background: var(--blue-pale); border-color: var(--blue-light); color: var(--blue-dark); }
-
-/* ── Three markets ── */
-.markets {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-}
-.market {
-  border-radius: 10px;
-  padding: 14px 14px 12px;
-  border: 1px solid;
-  cursor: default;
-  transition: transform .15s;
-}
-.market:hover { transform: translateY(-1px); }
-.market-name { font-size: 13px; font-weight: 700; margin-bottom: 5px; }
-.market-body { font-size: 11px; line-height: 1.55; }
-.market-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
-.mtag { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 3px; }
-
-.m-ets  { background: var(--blue-pale);   border-color: var(--blue-light); }
-.m-ets  .market-name { color: var(--blue-dark); }
-.m-ets  .market-body { color: var(--blue-dark); opacity: .75; }
-.m-ets  .mtag { background: var(--blue-light); color: var(--blue-dark); }
-
-.m-cbam { background: var(--red-pale);    border-color: var(--red-light); }
-.m-cbam .market-name { color: var(--red-dark); }
-.m-cbam .market-body { color: var(--red-dark); opacity: .75; }
-.m-cbam .mtag { background: var(--red-light); color: var(--red-dark); }
-
-.m-vcm  { background: #F0FDF4;            border-color: var(--green-light); }
-.m-vcm  .market-name { color: var(--green-dark); }
-.m-vcm  .market-body { color: var(--green-dark); opacity: .75; }
-.m-vcm  .mtag { background: var(--green-light); color: var(--green-dark); }
-
-/* ── Value stack table ── */
-.value-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
-}
-.value-table th {
-  background: var(--ink);
-  color: rgba(255,255,255,.7);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  padding: 9px 12px;
-  text-align: left;
-}
-.value-table td {
-  padding: 9px 12px;
-  border-bottom: 1px solid var(--border);
-  color: var(--ink-2);
-  vertical-align: top;
-  line-height: 1.45;
-}
-.value-table td:first-child { font-weight: 600; color: var(--ink); }
-.value-table tr:last-child td { border-bottom: none; font-weight: 700; color: var(--ink); background: var(--teal-pale); }
-.value-table tr:nth-child(even) td { background: var(--bg); }
-.value-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-
-/* ── Virtuous cycle ── */
-.cycle-bar {
-  background: var(--amber-dark);
-  border-radius: 10px;
-  padding: 18px 22px;
-  border: 1px solid rgba(253,230,138,.2);
-}
-.cycle-title {
-  font-family: var(--serif);
-  font-size: 16px;
-  color: var(--amber-light);
-  margin-bottom: 8px;
-}
-.cycle-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.cycle-step {
-  background: rgba(255,255,255,.08);
-  border-radius: 7px;
-  padding: 10px;
-  border: 1px solid rgba(253,230,138,.15);
-}
-.cycle-num { font-size: 9px; font-weight: 700; color: var(--amber-light); opacity: .6; letter-spacing: .1em; margin-bottom: 4px; }
-.cycle-step-title { font-size: 11px; font-weight: 600; color: var(--amber-light); margin-bottom: 3px; line-height: 1.3; }
-.cycle-step-body  { font-size: 10px; color: rgba(253,230,138,.6); line-height: 1.45; }
-.cycle-loop {
-  font-size: 11px;
-  color: rgba(253,230,138,.7);
-  text-align: center;
-  letter-spacing: .03em;
-  border-top: 1px solid rgba(253,230,138,.15);
-  padding-top: 12px;
-}
-
-/* ── Footer thesis ── */
-.thesis {
-  background: var(--teal-dark);
-  border-radius: 12px;
-  padding: 28px 32px;
-  text-align: center;
-  border: 1px solid rgba(167,243,208,.15);
-}
-.thesis-main {
-  font-family: var(--serif);
-  font-size: clamp(18px, 3vw, 26px);
-  color: var(--white);
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-.thesis-cn {
-  font-size: 14px;
-  color: var(--teal-light);
-  letter-spacing: .08em;
-  margin-bottom: 14px;
-}
-.thesis-sub {
-  font-size: 12px;
-  color: rgba(167,243,208,.6);
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* ── Connectors (visual flow lines between sections) ── */
-.flow-arrow {
-  display: flex;
-  justify-content: center;
-  padding: 6px 0;
-  color: var(--ink-3);
-  font-size: 18px;
-  opacity: .4;
-}
-
-/* ── Animations ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate { animation: fadeUp .5s ease forwards; opacity: 0; }
-.d1 { animation-delay: .05s; }
-.d2 { animation-delay: .12s; }
-.d3 { animation-delay: .20s; }
-.d4 { animation-delay: .28s; }
-.d5 { animation-delay: .36s; }
-.d6 { animation-delay: .44s; }
-.d7 { animation-delay: .52s; }
-.d8 { animation-delay: .60s; }
-.d9 { animation-delay: .68s; }
-
-/* ── Responsive ── */
-@media (max-width: 640px) {
-  .problems, .instruments, .markets { grid-template-columns: 1fr; }
-  .streams-grid { grid-template-columns: repeat(2, 1fr); }
-  .cycle-steps { grid-template-columns: 1fr 1fr; }
-  .page-header { padding: 32px 20px 28px; }
-  .container { padding: 0 16px; }
+.thesis-three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(0,200,150,.15);border-top:1px solid rgba(0,200,150,.15);margin-top:20px;}
+.t3{background:var(--teal-dk);padding:14px;text-align:center;}
+.t3-n{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--teal);margin-bottom:4px;}
+.t3-l{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,200,150,.45);}
+ 
+/* ── FOOTER ── */
+.footer{border-top:1px solid var(--rule);margin-top:48px;padding-top:24px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;}
+.footer p{font-family:var(--mono);font-size:9px;color:var(--ink4);line-height:1.7;letter-spacing:.04em;}
+.footer strong{color:rgba(255,255,255,.4);}
+ 
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.anim{animation:fadeUp .55s ease forwards;opacity:0;}
+.d01{animation-delay:.04s}.d02{animation-delay:.10s}.d03{animation-delay:.16s}
+.d04{animation-delay:.23s}.d05{animation-delay:.30s}.d06{animation-delay:.37s}
+.d07{animation-delay:.44s}.d08{animation-delay:.52s}.d09{animation-delay:.60s}
+.d10{animation-delay:.68s}.d11{animation-delay:.76s}.d12{animation-delay:.84s}
+.d13{animation-delay:.92s}
+ 
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .prob-row,.inst-row,.liab-grid,.markets{grid-template-columns:1fr;}
+  .metrics-grid,.exch-legs,.fin-stack,.cycle-steps,.thesis-three{grid-template-columns:1fr 1fr;}
+  .streams-grid{grid-template-columns:1fr 1fr;}
+  .h2-stats{grid-template-columns:1fr 1fr;}
+  .fin-eq{grid-template-columns:1fr;}
+  .fin-eq-arr{transform:rotate(90deg);}
+  .hdr{padding:40px 20px 36px;}
+  .wrap{padding:0 16px;}
 }
 </style>
 </head>
 <body>
-
-<!-- ── HEADER ── -->
-<header class="page-header">
-  <div class="header-inner">
-    <div class="header-eyebrow">Cetacea Carbon Pte Ltd · Kondoli Eco-Industrial Park · Port Playford SA</div>
-    <h1 class="header-title">Industrial Ecological<br>Value Realisation Platform</h1>
-    <div class="header-cn">工业生态产品价值实现平台</div>
-    <p class="header-sub">Australian zero-carbon industrial production · certified instruments · China Dual Carbon + EU CBAM compliance · Net Zero faster. Together.</p>
-    <div class="header-badges">
-      <span class="badge badge-teal">GPIPC-certified</span>
-      <span class="badge badge-teal">100% renewable grid</span>
-      <span class="badge badge-blue">ICR + CCER dual-track</span>
-      <span class="badge badge-blue">ISO 14067 / GB/T 24067</span>
-      <span class="badge badge-amber">SA–Shandong bilateral</span>
-      <span class="badge badge-amber">15th FYP aligned</span>
-    </div>
+ 
+<!-- ═══════════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════════ -->
+<header class="hdr">
+<div class="hdr-inner">
+  <div class="hdr-kicker">Cetacea Carbon · Kondoli Eco-Industrial Park · Port Playford SA</div>
+  <h1 class="hdr-title serif">Industrial Ecological<br>Value Realisation Platform</h1>
+  <div class="hdr-cn">工业生态产品价值实现平台</div>
+  <p class="hdr-thesis">
+    A certified zero-carbon eco-industrial park on Barngarla country at Port Playford, South Australia —
+    applying the China integrated park model to Australian natural advantage.
+    Scope 3 supply chain decarbonisation across six material categories.
+    Certified Decarbonised Materials + Certified tCO₂e value (ECRU™).
+    Chinese compliance capital, converted through the ECRU Exchange HKG,
+    funds Australian decarbonisation infrastructure and brings China technology and skills.
+  </p>
+  <div class="hdr-meta">
+    <span class="chip chip-t">GPIPC T/ESC 001-2024</span>
+    <span class="chip chip-t">100% renewable grid</span>
+    <span class="chip chip-b">ICR + CCER dual-track</span>
+    <span class="chip chip-b">ISO 14067 / GB/T 24067-2024</span>
+    <span class="chip chip-a">SA–Shandong bilateral 2026</span>
+    <span class="chip chip-a">15th FYP · 零碳工业园区</span>
+    <span class="chip chip-r">ECRU Exchange · HKG · e-CNY</span>
+    <span class="chip chip-p">CIA Fund · AUD 130M AIDF</span>
   </div>
+</div>
 </header>
-
-<div class="container">
-
-  <!-- PROBLEMS -->
-  <div class="section-label animate d1">The two problems this platform solves</div>
-  <div class="problems animate d1">
-    <div class="problem-card china">
-      <div class="problem-title">China: Dual Carbon + ETS</div>
-      <div class="problem-body">碳达峰 2030 · 碳中和 2060 · ETS Phase 2 tightens from 2027 · absolute cap by 2030 · CCER offset demand 82Mt/yr from steel sector alone — 9× undersupplied against current issuance · GB/T 47064-2026 green factory certification mandatory August 2026</div>
-    </div>
-    <div class="problem-card eu">
-      <div class="problem-title">EU: CBAM from January 2026</div>
-      <div class="problem-body">Carbon Border Adjustment Mechanism — mandatory certificates on embedded carbon in steel, cement, aluminium, fertiliser, hydrogen · EU ETS price EUR 70–130/t · free allocation phases to zero by 2034 · USD 150M+/yr exposure for a single Shandong steel mill · first certificate surrender September 2027</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     METRICS BAND
+═══════════════════════════════════════════════ -->
+<div class="metrics-band">
+<div class="metrics-grid">
+  <div class="metric m-t anim d01">
+    <div class="metric-num">AUD 10B+</div>
+    <div class="metric-lbl">New SA export +<br>instrument revenue / yr<br>by 2035</div>
+  </div>
+  <div class="metric m-b anim d02">
+    <div class="metric-num">USD 11–13B</div>
+    <div class="metric-lbl">Total forward ECRU<br>instrument commitments<br>10-year buyer universe</div>
+  </div>
+  <div class="metric m-a anim d03">
+    <div class="metric-num">50Mt+</div>
+    <div class="metric-lbl">tCO₂e avoided / yr<br>at full platform<br>capacity 2035</div>
+  </div>
+  <div class="metric m-g anim d04">
+    <div class="metric-num">20,000</div>
+    <div class="metric-lbl">SA jobs by 2035<br>regional + skilled<br>Port Augusta corridor</div>
+  </div>
+</div>
+</div>
+ 
+<div class="wrap">
+ 
+<!-- ═══════════════════════════════════════════════
+     THE TWO PROBLEMS
+═══════════════════════════════════════════════ -->
+<div class="sec anim d02">The two compliance problems — and the shared solution</div>
+<div class="prob-row anim d02">
+  <div class="prob china">
+    <div class="prob-flag">China — Dual Carbon + ETS / CCER</div>
+    <div class="prob-title">碳达峰 2030 · 碳中和 2060</div>
+    <div class="prob-body">ETS Phase 2 benchmarks tighten 2027. Absolute cap from 2030. CCER offset demand from steel sector alone: 82.5 Mt/yr — against total all-sector issuance of 9.48 Mt. 9× structurally undersupplied. GB/T 47064-2026 zero-carbon industrial park certification mandatory August 2026. IFRS S2 + SBTi Scope 3 Cat. 1 supply chain disclosure now board-level obligation for all major exporters.</div>
+    <div class="prob-nums">
+      <span class="pnum">82.5 Mt CCER demand (steel)</span>
+      <span class="pnum">9× undersupplied</span>
+      <span class="pnum">ETS Phase 2 from 2027</span>
+      <span class="pnum">GB/T 47064 Aug 2026</span>
     </div>
   </div>
-
-  <!-- PLATFORM -->
-  <div class="flow-arrow animate d2">↓</div>
-  <div class="platform-bar animate d2">
-    <div class="platform-bar-title">Cetacea Digital — MRV Intelligence Platform</div>
-    <div class="platform-bar-sub">Real-time verified emissions · ISO 14064 / GB/T 24067-2024 / ICR / GPIPC-aligned · one production event, two instruments</div>
-  </div>
-
-  <!-- PRODUCTION STREAMS -->
-  <div class="section-label animate d3">Australian zero-carbon production — five streams</div>
-  <div class="streams-outer animate d3">
-    <div class="streams-label">Kondoli Eco-Industrial Park · Port Playford · SA magnetite · Spencer Gulf limestone · SA grain belt · TFI tallow · Whalefall LFP/NCM · Hospital Creek blue carbon · Ngarrindjeri country</div>
-    <div class="streams-grid">
-      <div class="stream s-iron">
-        <span class="stream-name">Green iron / HBI</span>
-        <span class="stream-sub">SA magnetite → DR-grade → H₂-DRI · ~0.3 tCO₂/t vs 1.8 BF-BOF</span>
-      </div>
-      <div class="stream s-cement">
-        <span class="stream-name">Green cement</span>
-        <span class="stream-sub">Spencer Gulf limestone · geopolymer · CBAM-documented clinker</span>
-      </div>
-      <div class="stream s-fert">
-        <span class="stream-name">Green fertiliser</span>
-        <span class="stream-sub">Zone 1 green H₂ → ammonia → urea · SA grain belt domestic + export</span>
-      </div>
-      <div class="stream s-saf">
-        <span class="stream-name">SAF</span>
-        <span class="stream-sub">TFI tallow HEFA · SA straw FT/ATJ · CORSIA Annex IX</span>
-      </div>
-      <div class="stream s-bat">
-        <span class="stream-name">Battery materials</span>
-        <span class="stream-sub">Whalefall black mass · LFP/NCM precursor · EU Battery Reg. Art.7</span>
-      </div>
-    </div>
-    <div class="eco-strip">
-      <strong>+ Zone 8 — Ecological instruments:</strong> Hospital Creek blue carbon · Ngarrindjeri co-stewardship · EPVR bilateral · TNFD nature-positive
+  <div class="prob eu">
+    <div class="prob-flag">EU — CBAM from January 2026</div>
+    <div class="prob-title">Carbon Border Adjustment Mechanism</div>
+    <div class="prob-body">Mandatory certificates on embedded carbon in steel, cement, aluminium, fertiliser, hydrogen, electricity. EU ETS price EUR 70–130/t by 2030. Free allocation phases to zero by 2034. First certificate surrender September 2027. Downstream product expansion 2028. SISG/Rizhao: USD 150M+/yr CBAM exposure — exceeding full-year 2025 net profit of USD 79M. Shangang 600022.SS trading at 73–96% of book value throughout 2025.</div>
+    <div class="prob-nums">
+      <span class="pnum">EUR 70–130/t rising</span>
+      <span class="pnum">Zero free allocation 2034</span>
+      <span class="pnum">USD 150M+/yr Rizhao exposure</span>
+      <span class="pnum">1.9× net profit</span>
     </div>
   </div>
-
-  <!-- THE SEPARATION -->
-  <div class="section-label animate d4">The core innovation — one event, two separated instruments</div>
-  <div class="separation-wrapper animate d4">
-    <div class="separation-pill">One production event issues two fully separable revenue streams</div>
-  </div>
-  <div class="flow-arrow animate d4" style="opacity:.3; font-size:14px; gap:160px; justify-content:center;">↙&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↘</div>
-
-  <div class="instruments animate d5">
-    <div class="instrument-card smi">
-      <div class="inst-head">
-        <div class="inst-label">SMI — Supply Materials Instrument</div>
-        <div class="inst-name">Baiji Renew™</div>
-        <div class="inst-cn">白鱀再生™ · batch-level product carbon footprint certificate</div>
-      </div>
-      <div class="inst-body">
-        <strong>Travels with the tonne.</strong> Attached to every consignment leaving Kondoli. Proves the material was produced with a verified low-carbon process under ISO 14067 / GB/T 24067-2024. Creates the materials premium.
-        <br><br>
-        <strong>Materials premium: +USD 40–60/t</strong> over conventional commodity iron ore. The SMI is the price signal that makes certified production commercially viable independent of carbon instrument revenue.
-        <div class="inst-tags">
-          <span class="itag">Materials premium</span>
-          <span class="itag">Travels with product</span>
-          <span class="itag">CBAM embedded emissions doc</span>
-          <span class="itag">GB/T 24067-2024</span>
-          <span class="itag">IFRS S2 Scope 3 Cat.1</span>
-          <span class="itag">EU Battery Reg. Art.7</span>
-        </div>
-      </div>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     MRV PLATFORM
+═══════════════════════════════════════════════ -->
+<div class="gap-sm"></div>
+<div class="platform anim d03">
+  <div class="platform-name">Cetacea Digital — MRV Intelligence Platform</div>
+  <div class="platform-sub">Real-time verified emissions · ISO 14064 / GB/T 24067-2024 / ICR / GPIPC-aligned · one production event issues two separated instruments · park-level certification benefits all tenants</div>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     KONDOLI ECO-INDUSTRIAL PARK
+═══════════════════════════════════════════════ -->
+<div class="sec anim d04">Kondoli Eco-Industrial Park — the China integrated park model applied to Australian advantage</div>
+<div class="park-outer anim d04">
+  <div class="park-header">
+    <div>
+      <div class="park-header-title">Kondoli Eco-Industrial Park · Port Playford · 1,100 ha · DA approved · 99-year lease</div>
+      <div class="park-header-sub">Barngarla Country · Spencer Gulf · SA Magnetite Province · 100% renewable grid</div>
     </div>
-    <div class="instrument-card scmi">
-      <div class="inst-head">
-        <div class="inst-label">SCMI — Supply Chain Materials Instrument</div>
-        <div class="inst-name">ECRU™</div>
-        <div class="inst-cn">Embedded Carbon Reduction Unit · detachable · jurisdiction-portable</div>
-      </div>
-      <div class="inst-body">
-        <strong>Detaches from the tonne.</strong> The verified emission reduction unit generated by the production event. Separately tradeable, separately valuable, fungible into three regulatory markets simultaneously.
-        <br><br>
-        <strong>~1.5 ECRUs per tonne of green HBI</strong> (1.8 tCO₂/t BF-BOF baseline → 0.3 tCO₂/t certified = 1.5 tCO₂e avoided). At USD 50/ECRU: +USD 75/t carbon instrument value, independent of commodity price.
-        <div class="inst-tags">
-          <span class="itag">Carbon value extracted</span>
-          <span class="itag">Detachable</span>
-          <span class="itag">ICR international registered</span>
-          <span class="itag">CCER China dual-track</span>
-          <span class="itag">Three markets simultaneously</span>
-        </div>
-      </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <span class="chip chip-t">GPIPC certified</span>
+      <span class="chip chip-a">Shared benefit model</span>
     </div>
   </div>
-
-  <!-- THREE MARKETS -->
-  <div class="section-label animate d6">Three regulatory markets — served simultaneously</div>
-  <div class="markets animate d6">
-    <div class="market m-ets">
-      <div class="market-name">China ETS / CCER</div>
-      <div class="market-body">SCMI (ECRU) registered as CCER-equivalent. Offsets up to 5% of covered entity's verified emissions. 82.5 Mt/yr steel sector eligibility. 9× undersupplied. Supply-constrained market with guaranteed demand.</div>
-      <div class="market-tags">
-        <span class="mtag">Mandatory · Chinese law</span>
-        <span class="mtag">Domestic market</span>
+ 
+  <div class="park-principle">
+    <strong>The integrated park model:</strong> Australia's default approach isolates each project — separate energy costs, separate water infrastructure, separate carbon accounting, separate approvals. Kondoli inverts this. The park is the certified unit. Shared zero-carbon infrastructure — energy, water, waste integration, natural capital, MRV — creates a collective baseline no individual project could achieve alone. Every production unit inside Kondoli inherits that baseline. Every certified tonne leaving Port Playford carries the full weight of the park's certification.
+  </div>
+ 
+  <!-- SHARED INFRASTRUCTURE -->
+  <div class="park-infra">
+    <div class="infra-item">
+      <span class="infra-icon">⚡</span>
+      <span class="infra-name">100% RE Grid</span>
+      <span class="infra-sub">Shared renewable connection · no spot market exposure</span>
+    </div>
+    <div class="infra-item">
+      <span class="infra-icon">💧</span>
+      <span class="infra-name">Water System</span>
+      <span class="infra-sub">Spencer Gulf desal · shared recycled water · zero draw on Murray</span>
+    </div>
+    <div class="infra-item">
+      <span class="infra-icon">♻</span>
+      <span class="infra-name">Waste Integration</span>
+      <span class="infra-sub">One tenant's waste = another's feedstock · cement CO₂ → methanol</span>
+    </div>
+    <div class="infra-item">
+      <span class="infra-icon">◈</span>
+      <span class="infra-name">Cetacea Digital MRV</span>
+      <span class="infra-sub">One platform · one audit · park-level certification event</span>
+    </div>
+    <div class="infra-item">
+      <span class="infra-icon">❧</span>
+      <span class="infra-name">Natural Capital</span>
+      <span class="infra-sub">Barngarla co-stewardship · blue carbon (TBC with BDAC) · TNFD</span>
+    </div>
+  </div>
+ 
+  <!-- HYDROGEN CORE ASSET -->
+  <div class="h2-core">
+    <div class="h2-top">
+      <div class="h2-left">
+        <div class="h2-flag">Zone 1 — Core Asset · Hydrogen</div>
+        <div class="h2-name">Certified Decarbonised Hydrogen</div>
+        <div class="h2-cn">Baiji Renew™ 白鱀再生™ certification · standalone ECRU event · park infrastructure enabler</div>
+      </div>
+      <div class="h2-lcoh">
+        <div class="h2-lcoh-num">$2<span style="font-size:14px;">/kg</span></div>
+        <div class="h2-lcoh-lbl">LCOH target<br>AUD design spec</div>
       </div>
     </div>
-    <div class="market m-cbam">
-      <div class="market-name">EU CBAM Art. 9</div>
-      <div class="market-body">SMI (Baiji Renew™) provides embedded emissions documentation. SCMI (ECRU) provides Art. 9 verified carbon cost deduction. Together they reduce the EU importer's certificate obligation — saving Shangang USD 90–130/t in CBAM certificates by 2030.</div>
-      <div class="market-tags">
-        <span class="mtag">Trade regulation · EU law</span>
-        <span class="mtag">From Jan 2026</span>
+    <div class="h2-stats">
+      <div class="h2-stat">
+        <div class="h2-stat-n">~0.5 tCO₂e/t</div>
+        <div class="h2-stat-l">Certified H₂ (100% RE electrolysis) vs 10 tCO₂e/t SMR grey baseline</div>
+      </div>
+      <div class="h2-stat">
+        <div class="h2-stat-n">9.5 ECRU/t</div>
+        <div class="h2-stat-l">Highest ECRU yield of any stream · USD 475/t instrument value at USD 50/ECRU</div>
+      </div>
+      <div class="h2-stat">
+        <div class="h2-stat-n">USD 475/t</div>
+        <div class="h2-stat-l">ECRU instrument value — subsidises LCOH below grey H₂ parity when netted</div>
+      </div>
+      <div class="h2-stat">
+        <div class="h2-stat-n">$2/kg fixed</div>
+        <div class="h2-stat-l">Design anchor for RE + storage + water spec. Makes all downstream products regionally competitive.</div>
       </div>
     </div>
-    <div class="market m-vcm">
-      <div class="market-name">VCM / EPVR bilateral</div>
-      <div class="market-body">ECRU (industrial inset), ECRU-B (ecological / Hospital Creek), EVC (battery supply chain). ESG re-rating catalyst for below-NAV stocks. 生态产品价值实现 bilateral AU-China instrument. TNFD nature-positive disclosure.</div>
-      <div class="market-tags">
-        <span class="mtag">Voluntary · ESG-driven</span>
-        <span class="mtag">Global buyers</span>
+    <div class="h2-flows">
+      <span class="h2-flow-lbl">H₂ flows to →</span>
+      <span class="h2-dest">Iron / H₂-DRI</span>
+      <span class="h2-dest">Ammonia → Urea (fertiliser)</span>
+      <span class="h2-dest">Methanol (marine + chemical)</span>
+      <span class="h2-dest">SAF / FT pathway</span>
+      <span class="h2-dest">Cement (H₂ kiln)</span>
+      <span class="h2-dest">Export — Japan · Korea · Singapore</span>
+    </div>
+  </div>
+ 
+  <!-- SIX PRODUCTION STREAMS -->
+  <div style="padding:12px 16px 8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);">Six Scope 3 decarbonisation streams — each produces Certified Decarbonised Material (Baiji Renew™ SMI) + Certified tCO₂e value (ECRU™)</div>
+  <div class="streams-grid">
+    <div class="stream">
+      <div class="stream-num">STREAM 01</div>
+      <div class="stream-name">Iron</div>
+      <div class="stream-cdm">Cert. Decarb. Export Iron (HBI)</div>
+      <div class="stream-co2">0.3 tCO₂e/t vs 1.8 BF-BOF baseline</div>
+      <span class="stream-ecru">+ 1.5 ECRU / tonne HBI</span>
+    </div>
+    <div class="stream">
+      <div class="stream-num">STREAM 02</div>
+      <div class="stream-name">Cement</div>
+      <div class="stream-cdm">Cert. Decarb. Cement</div>
+      <div class="stream-co2">~0.4 tCO₂e/t vs 0.9 conventional</div>
+      <span class="stream-ecru">+ 0.5 ECRU / tonne</span>
+    </div>
+    <div class="stream">
+      <div class="stream-num">STREAM 03</div>
+      <div class="stream-name">Fertiliser</div>
+      <div class="stream-cdm">Cert. Decarb. Fertiliser (urea)</div>
+      <div class="stream-co2">~0.1 tCO₂e/t vs 2.5 Haber-Bosch</div>
+      <span class="stream-ecru">+ 2.4 ECRU / tonne</span>
+    </div>
+    <div class="stream">
+      <div class="stream-num">STREAM 04</div>
+      <div class="stream-name">Aviation + Marine Fuel</div>
+      <div class="stream-cdm">Cert. Decarb. Fuel (SAF + methanol)</div>
+      <div class="stream-co2">SAF: ~0.3 tCO₂e/t vs 3.2 fossil jet · Methanol: e-methanol via H₂+CO₂</div>
+      <span class="stream-ecru">+ CORSIA cert / 1,000L SAF · + ECRU / t methanol</span>
+    </div>
+    <div class="stream">
+      <div class="stream-num">STREAM 05</div>
+      <div class="stream-name">Battery Materials</div>
+      <div class="stream-cdm">Cert. Decarb. Battery Materials</div>
+      <div class="stream-co2">LFP/NCM precursor · EU Battery Reg. Art.7 · Whalefall black mass</div>
+      <span class="stream-ecru">+ EVC / tonne precursor</span>
+    </div>
+    <div class="stream">
+      <div class="stream-num">STREAM 06</div>
+      <div class="stream-name">Hydrogen (export)</div>
+      <div class="stream-cdm">Cert. Decarb. Hydrogen (export)</div>
+      <div class="stream-co2">~0.5 tCO₂e/t · Spencer Gulf export · Japan / Korea / Singapore</div>
+      <span class="stream-ecru">+ 9.5 ECRU / tonne H₂</span>
+    </div>
+  </div>
+  <div style="margin:0 16px 16px;padding:10px 14px;background:rgba(0,0,0,.2);border-radius:4px;border:1px solid var(--rule);font-size:10px;color:rgba(255,255,255,.3);line-height:1.6;">
+    <strong style="color:rgba(255,255,255,.5);">Zone 8 — Ecological instruments:</strong> Blue carbon on Barngarla country (site confirmation with BDAC in progress) · EPVR bilateral AU-China · TNFD nature-positive disclosure · ECRU-B issued against verified ecological sequestration
+  </div>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     ORE COMPARISON
+═══════════════════════════════════════════════ -->
+<div class="sec anim d05">Iron supply chain — WA hematite vs SA certified magnetite · material transformation + tCO₂e</div>
+<div class="ore-table-wrap anim d05">
+<table>
+  <thead>
+    <tr>
+      <th>Stage / product</th>
+      <th>Origin</th>
+      <th>USD / tonne</th>
+      <th>tCO₂e / tonne</th>
+      <th>Status</th>
+      <th>Instrument issued</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Hematite ore (Pilbara WA)</td>
+      <td>BHP / Rio Tinto export</td>
+      <td>~USD 100/t</td>
+      <td>1.8 tCO₂e/t (BF-BOF pathway)</td>
+      <td><span class="pill pill-u">Uncertified</span></td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Magnetite ore (Braemar SA) — raw export</td>
+      <td>SA — unprocessed</td>
+      <td>~USD 80/t</td>
+      <td>1.8 tCO₂e/t (same BF-BOF pathway)</td>
+      <td><span class="pill pill-u">Uncertified</span></td>
+      <td>None</td>
+    </tr>
+    <tr class="cert">
+      <td>Cert. Decarb. Export Ore (SA magnetite · H₂ beneficiation · 100% RE)</td>
+      <td>Kondoli — processed ore</td>
+      <td>USD 130–150/t</td>
+      <td>0.45 tCO₂e/t</td>
+      <td><span class="pill pill-c">Certified</span></td>
+      <td>Baiji Renew™ SMI (batch PCF cert)</td>
+    </tr>
+    <tr class="cert">
+      <td>Cert. Decarb. Export Iron — HBI (H₂-DRI · 100% RE · GPIPC park baseline)</td>
+      <td>Kondoli — HBI</td>
+      <td>USD 270–310/t</td>
+      <td>0.3 tCO₂e/t</td>
+      <td><span class="pill pill-c">Certified</span></td>
+      <td>Baiji Renew™ SMI (product PCF cert)</td>
+    </tr>
+    <tr class="instr">
+      <td>ECRU™ — detached carbon value · 1.5 tCO₂e avoided per tonne HBI</td>
+      <td>Cross-border financial instrument</td>
+      <td>USD 75/t equiv.</td>
+      <td>1.5 tCO₂e avoided</td>
+      <td><span class="pill pill-i">SCMI</span></td>
+      <td>ECRU™ 生态循环减排单元 — pre-deployed into H₂ infrastructure via CIA fund</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     INSTRUMENT SPLIT
+═══════════════════════════════════════════════ -->
+<div class="sec anim d06">The core innovation — one production event · two separated instruments</div>
+<div class="split-rule anim d06">
+  <div class="split-line"></div>
+  <div class="split-pill">One event · two fully separable revenue streams</div>
+  <div class="split-line"></div>
+</div>
+<div class="gap-sm"></div>
+<div class="inst-row anim d06">
+  <div class="inst smi">
+    <div class="inst-hd">
+      <div class="inst-flag">SMI — Supply Materials Instrument</div>
+      <div class="inst-name">Baiji Renew™<br>白鱀再生™</div>
+      <div class="inst-cn">Batch-level product carbon footprint certificate · travels with the tonne · the certification brand</div>
+    </div>
+    <div class="inst-bd">
+      <p><strong>Travels with the material.</strong> Attached to every consignment leaving Kondoli. Certifies the material as a Certified Decarbonised Material — the category descriptor — under ISO 14067 / GB/T 24067-2024. Creates the materials identity premium and the verified product credential.</p>
+      <p>Satisfies CBAM embedded emissions documentation, GB/T 47064-2026 green factory input, IFRS S2 Scope 3 Cat. 1, and EU Battery Regulation Art. 7 simultaneously.</p>
+      <div class="itags">
+        <span class="itag">Materials premium</span>
+        <span class="itag">Travels with product</span>
+        <span class="itag">CBAM doc</span>
+        <span class="itag">GB/T 24067-2024</span>
+        <span class="itag">Scope 3 Cat.1</span>
+        <span class="itag">EU Battery Reg.</span>
+        <span class="itag">GPIPC park baseline</span>
       </div>
     </div>
   </div>
-
-  <!-- VALUE STACK -->
-  <div class="section-label animate d7">Value stack per tonne of certified green HBI ex-Kondoli</div>
-  <div class="value-wrap animate d7">
-    <table class="value-table">
-      <thead>
-        <tr>
-          <th>Value component</th>
-          <th>Instrument</th>
-          <th>Mechanism</th>
-          <th>USD / tonne</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Commodity base</td>
-          <td>Physical HBI</td>
-          <td>Standard DR-grade iron market price</td>
-          <td>~USD 270/t</td>
-        </tr>
-        <tr>
-          <td>SMI materials premium</td>
-          <td>Baiji Renew™ PCF cert</td>
-          <td>Certified low-carbon identity · CBAM documentation · green factory input credential</td>
-          <td>+USD 40–60/t</td>
-        </tr>
-        <tr>
-          <td>SCMI carbon value</td>
-          <td>ECRU™</td>
-          <td>~1.5 ECRUs/t × USD 50 (Phase 1) rising to USD 70+ Phase 2</td>
-          <td>+USD 75–105/t</td>
-        </tr>
-        <tr>
-          <td>CBAM liability avoided</td>
-          <td>ECRU Art. 9 deduction</td>
-          <td>Reduces EU importer's certificate obligation · commercial savings flow back to exporter</td>
-          <td>+USD 90–130/t (2030)</td>
-        </tr>
-        <tr>
-          <td>ETS CCER offset value</td>
-          <td>ECRU as CCER-equivalent</td>
-          <td>Offsets Shangang's ETS deficit at CCER premium over open market CEA</td>
-          <td>+USD 15–25/t</td>
-        </tr>
-        <tr>
-          <td><strong>Total value stack</strong></td>
-          <td>All instruments combined</td>
-          <td>vs. conventional DR-grade concentrate at USD 120–140/t without certification</td>
-          <td><strong>USD 490–590/t</strong></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- VIRTUOUS CYCLE -->
-  <div class="section-label animate d8">The virtuous cycle — carbon penalty value pulled forward</div>
-  <div class="cycle-bar animate d8">
-    <div class="cycle-title">Carbon penalty value pulled forward to fund supply chain decarbonisation</div>
-    <div class="cycle-steps">
-      <div class="cycle-step">
-        <div class="cycle-num">01</div>
-        <div class="cycle-step-title">Future penalty recognised now</div>
-        <div class="cycle-step-body">Shangang's CBAM liability is USD 150M+/yr by 2028. The penalty exists whether or not they act. It is already real — just not yet paid.</div>
-      </div>
-      <div class="cycle-step">
-        <div class="cycle-num">02</div>
-        <div class="cycle-step-title">Penalty becomes investment</div>
-        <div class="cycle-step-body">Forward ECRU purchase (USD 250M/yr) redirects the penalty into supply chain decarbonisation. The ECRU value exceeds the CBAM liability. Not avoidance — redirection.</div>
-      </div>
-      <div class="cycle-step">
-        <div class="cycle-num">03</div>
-        <div class="cycle-step-title">Investment funds infrastructure</div>
-        <div class="cycle-step-body">ECRU contract revenue funds Zone 1 green H₂ electrolyser farm · Cetacea Digital MRV platform · GPIPC certification · Port Playford shared infrastructure.</div>
-      </div>
-      <div class="cycle-step">
-        <div class="cycle-num">04</div>
-        <div class="cycle-step-title">More product. Lower exposure.</div>
-        <div class="cycle-step-body">Funded infrastructure produces more certified green product. More SMI + SCMI issued. More buyers served. Sector-wide CBAM exposure falls. Cycle accelerates.</div>
+  <div class="inst scmi">
+    <div class="inst-hd">
+      <div class="inst-flag">SCMI — Supply Chain Materials Instrument</div>
+      <div class="inst-name">ECRU™ · 生态循环减排单元</div>
+      <div class="inst-cn">Embedded Carbon Reduction Unit · detachable · jurisdiction-portable<br>在工业体系中体现减排与循环价值的生态资产单位</div>
+    </div>
+    <div class="inst-bd">
+      <p><strong>Detaches from the tonne.</strong> The verified tCO₂e reduction unit generated by the production event. Separately tradeable, fungible into three regulatory markets simultaneously. Registered on the ECRU Exchange HKG — a registry and catalogue of verified tCO₂e functional units by category.</p>
+      <p>The ECRU is a <strong>cross-border financial instrument</strong>: it converts Chinese ETS/CBAM compliance liability (RMB/EUR) into Australian infrastructure investment (AUD) through the CIA fund and banking layer. ECRU value is not stacked revenue — it is pre-deployed into the H₂ infrastructure that makes certified production possible.</p>
+      <div class="itags">
+        <span class="itag">Cross-border instrument</span>
+        <span class="itag">ICR international</span>
+        <span class="itag">CCER dual-track</span>
+        <span class="itag">ETS · CBAM · VCM</span>
+        <span class="itag">Registry: ECRU Exchange HKG</span>
+        <span class="itag">Fund: CIA</span>
       </div>
     </div>
-    <div class="cycle-loop">
-      more instrument investment → faster decarbonisation → more certified product → lower CBAM/ETS exposure → freed compliance capital → more investment ↺
+  </div>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     LIABILITY TABLES
+═══════════════════════════════════════════════ -->
+<div class="sec anim d07">Compliance liability — named counterparties</div>
+<div class="liab-grid anim d07">
+  <div class="liab steel">
+    <div class="liab-hd">
+      <div class="liab-hd-title">Steel — Shandong · SISG · Shangang · Rizhao</div>
+      <div class="liab-hd-sub">600022.SS · Shandong Iron &amp; Steel Group · ETS Phase 2 + CBAM exposure</div>
+    </div>
+    <div class="liab-rows">
+      <div class="liab-row"><span class="liab-lbl">Shandong province steel output</span><span class="liab-val white">~90 Mt/yr</span></div>
+      <div class="liab-row"><span class="liab-lbl">SISG / Shangang total (2025)</span><span class="liab-val white">18.25 Mt/yr crude steel</span></div>
+      <div class="liab-row"><span class="liab-lbl">Rizhao base output (2026 plan)</span><span class="liab-val white">9.0 Mt/yr</span></div>
+      <div class="liab-row"><span class="liab-lbl">EU exports (2025)</span><span class="liab-val white">1.263 Mt/yr</span></div>
+      <div class="liab-row"><span class="liab-lbl">CBAM gross liability (2028)</span><span class="liab-val red">USD 150M+/yr</span></div>
+      <div class="liab-row"><span class="liab-lbl">Shangang 2025 net profit</span><span class="liab-val white">~USD 79M</span></div>
+      <div class="liab-row"><span class="liab-lbl">CBAM as multiple of net profit</span><span class="liab-val red">1.9× net profit</span></div>
+      <div class="liab-row"><span class="liab-lbl">Stock (2025): % of book value</span><span class="liab-val red">73–96% NAV · chronic 长期破净</span></div>
+      <div class="liab-row"><span class="liab-lbl">ETS CCER offset eligibility (5%)</span><span class="liab-val white">~0.9 Mt/yr from Rizhao</span></div>
+      <div class="liab-row"><span class="liab-lbl">Forward ECRU contract (proposed)</span><span class="liab-val teal">5M ECRUs/yr · USD 250M/yr</span></div>
+      <div class="liab-row"><span class="liab-lbl">Contract total (10yr)</span><span class="liab-val teal">USD 2.5B</span></div>
+      <div class="liab-row"><span class="liab-lbl">ECRU value vs CBAM liability</span><span class="liab-val teal">USD 250M &gt; USD 150M ✓</span></div>
     </div>
   </div>
-
-  <!-- THESIS FOOTER -->
-  <div class="flow-arrow animate d9">↓</div>
-  <div class="thesis animate d9">
-    <div class="thesis-main">Net Zero faster. Together.</div>
-    <div class="thesis-cn">携手，更快实现净零</div>
-    <div class="thesis-sub">The intelligence that finances the industrial decarbonisation infrastructure the world needs but cannot fund. One platform. Five CBAM sectors. Three regulatory markets. One production event issues all instruments.</div>
-  </div>
-
-  <!-- FOOTER META -->
-  <div style="margin-top:32px; padding:20px 0 0; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-    <div style="font-size:11px; color:var(--ink-3); line-height:1.6;">
-      <strong style="color:var(--ink);">Cetacea Carbon Pte Ltd</strong> · Anthony Coles, Founder & CEO<br>
-      International Advisor, GPIPC · Chair, Australia China Energy Transition Forum (ISETS/ACETF)
+  <div class="liab saf">
+    <div class="liab-hd">
+      <div class="liab-hd-title">Aviation + Marine Fuel · SAF + Methanol</div>
+      <div class="liab-hd-sub">TFI tallow HEFA · SA straw FT/ATJ · e-methanol · CORSIA + IMO CII</div>
     </div>
-    <div style="font-size:11px; color:var(--ink-3); text-align:right; line-height:1.6;">
-      Kondoli Eco-Industrial Park · Port Playford, South Australia<br>
-      SA–Shandong Sister State Programme 2026 · Green Bridges Adelaide Nov 2026
+    <div class="liab-rows">
+      <div class="liab-row"><span class="liab-lbl">Tallow (uncertified)</span><span class="liab-val red">~2.8 tCO₂e/t · no CORSIA</span></div>
+      <div class="liab-row"><span class="liab-lbl">Tallow Cert. Decarb. (Baiji Renew™ HEFA)</span><span class="liab-val teal">~0.3 tCO₂e/t · CORSIA Annex IX</span></div>
+      <div class="liab-row"><span class="liab-lbl">tCO₂e avoided per tonne SAF</span><span class="liab-val white">2.5 tCO₂e/t</span></div>
+      <div class="liab-row"><span class="liab-lbl">ECRU per 1,000 litres SAF</span><span class="liab-val teal">~2.1 ECRUs</span></div>
+      <div class="liab-row"><span class="liab-lbl">Phase 1 tallow feedstock (TFI)</span><span class="liab-val white">~30,000 t/yr</span></div>
+      <div class="liab-row"><span class="liab-lbl">Phase 1 SAF output</span><span class="liab-val white">~25M litres/yr</span></div>
+      <div class="liab-row"><span class="liab-lbl">Phase 1 ECRU yield (SAF)</span><span class="liab-val teal">~52,500 ECRUs/yr</span></div>
+      <div class="liab-row"><span class="liab-lbl">Methanol (e-methanol via H₂+CO₂)</span><span class="liab-val white">H₂ cost at $2/kg → competitive</span></div>
+      <div class="liab-row"><span class="liab-lbl">Marine methanol ECRU yield</span><span class="liab-val teal">~1.8 ECRUs/t methanol</span></div>
+      <div class="liab-row"><span class="liab-lbl">Phase 2 straw FT/ATJ (2031)</span><span class="liab-val amber">150M litres/yr · AUD 300–500M capex</span></div>
+      <div class="liab-row"><span class="liab-lbl">CORSIA mandatory phase</span><span class="liab-val amber">2027–2029 · Chinese airlines obligated</span></div>
     </div>
   </div>
-
-</div><!-- /container -->
-
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     ECRU EXCHANGE
+═══════════════════════════════════════════════ -->
+<div class="sec anim d08">ECRU Exchange — registry and catalogue · not a financial intermediary</div>
+<div class="exchange anim d08">
+  <div class="exch-flag">ECRU Exchange · Cetacea Registry Services (HK) Ltd</div>
+  <div class="exch-title">Hong Kong Registry · e-CNY Settlement Gateway</div>
+  <div class="exch-sub">数字人民币 · dual-listed SG/EU · English-law enforceability · outside mainland capital controls</div>
+  <div class="exch-clarify">
+    <strong>What the ECRU Exchange is:</strong> A registry and catalogue. It records, lists, and catalogues verified tCO₂e functional units by category (iron ECRU, cement ECRU, fertiliser ECRU, hydrogen ECRU, etc.). It issues unique identifiers, tracks provenance, prevents double-counting, and provides the verified data layer that makes the instruments credible. It is infrastructure — not a financial institution, not a trading venue, not a fund manager. It does not hold, manage, or trade financial instruments. <strong>The banking layer and fund management sit separately — see Finance Layer below.</strong>
+  </div>
+  <div class="exch-legs">
+    <div class="leg">
+      <div class="leg-n">LEG 1 — CHINA</div>
+      <div class="leg-t">Compliance liability recognised</div>
+      <div class="leg-b">Chinese industrial buyer quantifies ETS deficit, CBAM obligation, CCER shortfall. Real balance sheet liability from 2026. Denominated in RMB and EUR.</div>
+    </div>
+    <div class="leg">
+      <div class="leg-n">LEG 2 — HKG REGISTRY</div>
+      <div class="leg-t">ECRU listed + e-CNY gateway</div>
+      <div class="leg-b">Verified tCO₂e units catalogued in ECRU Exchange. e-CNY (数字人民币) settlement gateway. Financial instruments structured by banking layer — not by the registry.</div>
+    </div>
+    <div class="leg">
+      <div class="leg-n">LEG 3 — CIA FUND</div>
+      <div class="leg-t">AUD conversion + deployment</div>
+      <div class="leg-b">Cetacea Investments Australia receives ECRU instruments from registry. CIA fund converts to AUD and deploys into certified Port Playford infrastructure projects.</div>
+    </div>
+    <div class="leg">
+      <div class="leg-n">LEG 4 — BILATERAL</div>
+      <div class="leg-t">Tech · skills · capacity</div>
+      <div class="leg-b">China electrolyser technology, MES/SCADA IP, battery recycling systems co-deployed alongside capital. SA workforce skills transfer. Sovereign capability built bilaterally.</div>
+    </div>
+  </div>
+  <div class="flow-strip">
+    <span class="fn fn-r">Chinese liability (RMB/EUR)</span>
+    <span class="fa">→</span>
+    <span class="fn fn-w">Banking counterparties</span>
+    <span class="fa">→</span>
+    <span class="fn fn-w">ECRU Exchange HKG (registry)</span>
+    <span class="fa">→</span>
+    <span class="fn fn-r">e-CNY settlement</span>
+    <span class="fa">→</span>
+    <span class="fn fn-w">CIA Fund (AUD)</span>
+    <span class="fa">→</span>
+    <span class="fn fn-t">Port Playford infrastructure</span>
+    <span class="fa">+</span>
+    <span class="fn fn-g">China tech + skills</span>
+    <span class="fa">→</span>
+    <span class="fn fn-t">Certified production</span>
+    <span class="fa">→</span>
+    <span class="fn fn-w">ECRU issued · compliance discharged</span>
+    <span class="fa">↺</span>
+  </div>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     FINANCE LAYER
+═══════════════════════════════════════════════ -->
+<div class="sec anim d09">Finance layer — CIA · banking · instrument management</div>
+<div class="finance anim d09">
+  <div class="fin-flag">Cetacea Investments Australia · AIDF · Banking Layer</div>
+  <div class="fin-title">The Finance Architecture</div>
+  <div class="fin-sub">Three distinct layers — registry · fund · banking — each with separate licensing, liability, and function</div>
+  <div class="fin-stack">
+    <div class="fin-layer">
+      <div class="fin-layer-n">Layer 1 — Registry</div>
+      <div class="fin-layer-t">ECRU Exchange HKG</div>
+      <div class="fin-layer-b">Catalogues and verifies tCO₂e functional units. Issues unique identifiers. Prevents double-counting. Provides audit trail. Does not hold or manage financial instruments. Infrastructure layer only.</div>
+    </div>
+    <div class="fin-layer">
+      <div class="fin-layer-n">Layer 2 — Fund</div>
+      <div class="fin-layer-t">Cetacea Investments Australia (CIA)</div>
+      <div class="fin-layer-b">Manages ECRU instruments from registry into licensed financial structures. AUD 130M AIDF Australian tranche. AUD 20M Kondoli catalyst allocation. Deploys capital into certified Port Playford infrastructure projects. Forward ECRU purchase contract management. Bridges registry to capital markets.</div>
+    </div>
+    <div class="fin-layer">
+      <div class="fin-layer-n">Layer 3 — Banking</div>
+      <div class="fin-layer-t">Banking counterparties</div>
+      <div class="fin-layer-b">Licensed financial institutions structure and hold forward purchase contracts, green bonds, carbon-linked instruments built on top of ECRU registry units. ICBC, CDB (China-side). ANZ, Macquarie, CEFC (AU-side). e-CNY → AUD conversion via HKG gateway. Bring capital, institutional credibility, and distribution networks.</div>
+    </div>
+  </div>
+  <div class="fin-eq">
+    <div class="fin-eq-side">
+      <div class="fin-eq-lbl">Input — catalyst + compliance capital</div>
+      <div class="fin-eq-item"><strong>AUD 20M</strong> CIA catalyst (AIDF Australian tranche)</div>
+      <div class="fin-eq-item"><strong>USD 250M/yr</strong> Shangang forward ECRU purchase (10yr = USD 2.5B)</div>
+      <div class="fin-eq-item"><strong>e-CNY → AUD</strong> via ECRU Exchange HKG + banking layer</div>
+      <div class="fin-eq-item"><strong>China tech + IP</strong> electrolyser · MES · recycling systems</div>
+      <div class="fin-eq-item"><strong>CEFC co-investment</strong> (Major Development designation required)</div>
+    </div>
+    <div class="fin-eq-arr">→</div>
+    <div class="fin-eq-side">
+      <div class="fin-eq-lbl">Output — certified production + instrument value</div>
+      <div class="fin-eq-item"><strong>AUD 400–600M</strong> Zone 1 H₂ electrolyser funded</div>
+      <div class="fin-eq-item"><strong>3 Mt/yr</strong> Cert. Decarb. Export Iron (Phase 1)</div>
+      <div class="fin-eq-item"><strong>AUD 1.5B/yr</strong> certified HBI export revenue</div>
+      <div class="fin-eq-item"><strong>4.5M ECRUs/yr</strong> issued across ETS / CBAM / VCM</div>
+      <div class="fin-eq-item"><strong>AUD 700M/yr</strong> ECRU instrument value — pre-deployed into next cycle</div>
+      <div class="fin-eq-item"><strong>AUD 10B+/yr</strong> all-stream revenue + instruments by 2035</div>
+    </div>
+  </div>
+  <div class="fin-ratio">
+    Catalyst leverage: <strong>AUD 20M → AUD 2.2B/yr</strong> Phase 1 combined revenue + instrument value ·
+    <strong>ECRU instrument value is not stacked revenue</strong> — it is pre-deployed into the H₂ infrastructure that makes certified production possible ·
+    The penalty is not avoided. It is redirected. <strong>Penalty becomes investment. Liability becomes infrastructure. Compliance becomes capability.</strong>
+  </div>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     VIRTUOUS CYCLE
+═══════════════════════════════════════════════ -->
+<div class="sec anim d10">The virtuous cycle — self-funding decarbonisation</div>
+<div class="cycle anim d10">
+  <div class="cycle-flag">Industrial Ecological Value Realisation</div>
+  <div class="cycle-title">More investment · faster decarbonisation · more certified product · lower sector exposure</div>
+  <div class="cycle-sub">Each cycle funds the next. No government grant enters the loop. The system accelerates itself through compliance capital redirection.</div>
+  <div class="cycle-steps">
+    <div class="cs">
+      <div class="cs-n">01 — RECOGNISE</div>
+      <div class="cs-t">Penalty is already real</div>
+      <div class="cs-b">Shangang's CBAM liability is USD 150M+/yr — quantified, growing, unavoidable. The question is only whether it is paid to the EU border or redirected.</div>
+    </div>
+    <div class="cs">
+      <div class="cs-n">02 — REDIRECT</div>
+      <div class="cs-t">Penalty becomes investment</div>
+      <div class="cs-b">Forward ECRU purchase via CIA fund + banking layer redirects compliance capital into AU infrastructure. ECRU value exceeds CBAM liability. Not avoidance — conversion.</div>
+    </div>
+    <div class="cs">
+      <div class="cs-n">03 — BUILD</div>
+      <div class="cs-t">Infrastructure → certification</div>
+      <div class="cs-b">H₂ at $2/kg anchors all stream economics. Cetacea Digital MRV certifies. Baiji Renew™ SMI + ECRU issued per tonne. Park baseline lowers all tenants' carbon intensity.</div>
+    </div>
+    <div class="cs">
+      <div class="cs-n">04 — ACCELERATE</div>
+      <div class="cs-t">Lower exposure · more buyers</div>
+      <div class="cs-b">More certified product → lower sector-wide carbon intensity → reduced ETS deficit + CBAM exposure → freed compliance capital → more instrument investment → cycle repeats.</div>
+    </div>
+  </div>
+  <div class="cycle-loop">
+    instrument investment → H₂ infrastructure → certified material + ECRU → compliance discharged → lower sector exposure → freed capital → more instrument investment ↺<br>
+    China tech + skills flow in · SA sovereign capability grows · regional competitiveness anchored by $2/kg H₂
+  </div>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     THREE MARKETS
+═══════════════════════════════════════════════ -->
+<div class="sec anim d11">Three regulatory markets — ECRU serves all simultaneously</div>
+<div class="markets anim d11">
+  <div class="mkt m-ets">
+    <div class="mkt-flag">Market 1 — Mandatory · China</div>
+    <div class="mkt-title">China ETS / CCER</div>
+    <div class="mkt-body">ECRU as CCER-equivalent. Offsets up to 5% of covered entity's verified emissions. 82.5 Mt/yr steel sector demand. 9× undersupplied. Supply-constrained market with guaranteed demand and no competing certified international supply at scale. Phase 2 tightening from 2027 structurally increases demand.</div>
+  </div>
+  <div class="mkt m-cbam">
+    <div class="mkt-flag">Market 2 — Trade regulation · EU</div>
+    <div class="mkt-title">EU CBAM Art. 9</div>
+    <div class="mkt-body">Baiji Renew™ SMI provides embedded emissions documentation per consignment. ECRU provides Art. 9 verified carbon cost deduction. Together reduce EU importer's certificate obligation by USD 90–130/t by 2030. Free allocation phases to zero 2034 — effective cost rising every year. Not a carbon market — a trade regulation.</div>
+  </div>
+  <div class="mkt m-vcm">
+    <div class="mkt-flag">Market 3 — Voluntary · Global</div>
+    <div class="mkt-title">VCM / EPVR bilateral</div>
+    <div class="mkt-body">ESG re-rating catalyst for below-NAV industrial stocks. 生态产品价值实现 bilateral AU-China instrument under China MEE EPVR policy. TNFD nature-positive supply chain disclosure. ECRU-B (ecological). EVC (battery supply chain). Industrial inset — highest-integrity VCM category.</div>
+  </div>
+</div>
+ 
+<!-- ═══════════════════════════════════════════════
+     THESIS
+═══════════════════════════════════════════════ -->
+<div class="gap-sm anim d12"></div>
+<div class="thesis anim d12">
+  <div class="thesis-main">Net Zero faster. Together.</div>
+  <div class="thesis-cn">携手，更快实现净零</div>
+  <div class="thesis-tagline">
+    Penalty becomes investment. Liability becomes infrastructure. Compliance becomes capability.<br>
+    The China eco-industrial park model. Australian natural advantage. Bilateral shared benefit.<br>
+    One platform. Six Scope 3 decarbonisation streams. Three regulatory markets. One event issues all instruments.
+  </div>
+  <div class="thesis-three">
+    <div class="t3">
+      <div class="t3-n">AUD 10B+/yr</div>
+      <div class="t3-l">New SA export + instrument revenue by 2035</div>
+    </div>
+    <div class="t3">
+      <div class="t3-n">50 Mt+/yr</div>
+      <div class="t3-l">tCO₂e avoided at full platform capacity</div>
+    </div>
+    <div class="t3">
+      <div class="t3-n">20,000</div>
+      <div class="t3-l">SA jobs by 2035 · regional + skilled</div>
+    </div>
+  </div>
+</div>
+ 
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>Cetacea Carbon Pte Ltd</strong> · Anthony Coles, Founder &amp; CEO<br>
+  International Advisor, GPIPC · Chair, Australia China Energy Transition Forum (ISETS/ACETF)<br>
+  Green Bridges Adelaide · November 2026</p>
+  <p style="text-align:right;">Kondoli Eco-Industrial Park · Port Playford · South Australia<br>
+  Barngarla Country · SA–Shandong Sister State Programme<br>
+  <span class="mono">cetaceacircular.github.io</span></p>
+</div>
+ 
+</div><!-- /wrap -->
 </body>
 </html>
